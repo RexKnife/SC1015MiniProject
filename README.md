@@ -1,14 +1,14 @@
 # SC1015MiniProject
 SC1015 Mini Project - Mahesh Nithilan, Rajkumar Saanvi, Sunilkumar Hrishikesh
-Introduction
+## Introduction
 We are NTU students Nithilan, Hrishikesh and Saanvi here to elaborate on our SC1015 Mini Project.
 
-Practical Motivation
+## Practical Motivation
 We wanted to be able to predict stock prices for the near future using Machine Learning and Data Science. 
 Doing this would allow us to make substantial financial profit if implemented correctly and accurately for obvious reasons.
 We chose not to do the same with cryptocurrencies because of their high volatility and tendency to sway to the market.
 
-Sample Collection
+## Sample Collection
 We first needed a way to collect the names and "tickers" of all publically traded companies whose stocks can be traded. 
 We specifically chose NYSE because it is the biggest and oldest stock exchange globally.
 We did this by finding an automatically updating list of NYSE stocks and tickers available on github, specifically from this https://github.com/rreichel3/US-Stock-Symbols/tree/main/nyse 
@@ -17,32 +17,32 @@ Instead, we can access the daily stock price highs, lows, closing and opening pr
 We then randomly sampled the closing price information(the price at which the stock stops at when the stock market closes for the day) for 5 different companies and observed the trend in data, 
 a sample of which can be shown here
 
-Problem Formulation
+## Problem Formulation
 Predicting future short-term price movement and resultant prices using past inter-day data for NYSE publically traded companies through time-series regression
 
-Data Preparation
+## Data Preparation
 Given that we had prepared data collection and sampling from the prior stages, here we just had to decided what companies we wanted to develop our model based on. 
 The data itself was very structured. We already only wanted closing data and so we seperated this from the other available data to decrease noise.
 We just had to remove NA values because we mass downloaded our stocks and they were automatically fit to the earliest data available, which usually belonged to the oldest company
 An example of this is shown below.
 
-Statistical Description
+## Statistical Description
 The description of the data provided some understanding of the variance and distribution of each stock, as well as the number of available data points. 
 This latter statistic was useful in determining the range of training and testing data later on. The variance also allowed us to guage the relative volatility of the stock as a whole
 
-Exploratory Analysis
+## Exploratory Analysis
 The formula for volatility is merely the standard deviation of the prices, and this was available with the simple .describe() function in pandas. 
 We also computed the number of up-days and down-days for each stock. This is different from the overall price growth because we are only interested in day-day price changes and so knowing the ratio of ups-downs is highly useful
 
-Pattern Recognition
+## Pattern Recognition
 Because of the apparant randomness of the data, it was difficult to discover stock-specific trends just looking at the graphs visually or through simple regression models. We used the above formula to calculate the up-down ratio. 
 What we also realized were these stocks were growing rather consistently, especially those in the S&P 500, with some small variations from y-y but overall increase in stock price. This made us realize that 
 we were likely to be more successful in predicting stock prices if we chose less volatile stocks, so we limited ourselves to the S&P 500 Constituent Stocks. 
 
-Analytic Visualization
+## Analytic Visualization
 The best way of representing the information we chose is as a stock price chart as we've shown here. 
 
-Machine Learning
+## Machine Learning
 As we've already established, the movement of pricing data is naturally dynamic and highly sporadic day-to-day. With our goal being to predict the next days price, the most natural thing to do
  would be to take the previous days and try to see if theres some inner pattern
 However, this inner pattern is very, very difficult to find through trial and error - if there even is one. Needing to compute this for every seperate stock we take is impossible and a waste of time. 
@@ -52,8 +52,7 @@ chose
 of RNNs were LSTMs(Long-Short Term Memory). This is because they avoided the vanishing/exploding gradient problem and are more capable of determining long term patterns because of their ability to 
 selectively remember data deemed important. This filters alot of noise, which is crucial in this sporadic application. 
 
-
-Algorithmic Optimization
+## Algorithmic Optimization
 Implementation specifically, we starting by implementing a 3-LSTM Layer NN that takes one days price as input and is required to predict that price some n days later, lets call this the prediction buffer.
  
 Through trial and error and research, we optimized the NN to use the adam optimizer and set the loss function to MSE, as the size and magnitude of the error is signficant in determining the new weights 
@@ -66,7 +65,7 @@ variation in its entirety.
 We ran for 30 epochs with a 30 batch size - to represent monthly data period updates
 
 
-Statistical Inference and Information Presentation
+## Statistical Inference and Information Presentation
 Now onto the results. We have two different characteristics we aim to be successful in. One is identifying the price movement, the other the price magnitude. 
 We would also like to understand how well our model fits the training and test stock data, and the rate of error.
 
@@ -87,16 +86,16 @@ we determined that the higher the volatilty the less effective the model.
 As can be seen by the graph here.
 
 
-Intelligent Decision
+## Intelligent Decision
 However, just knowing the price data prediction is not enough to generate a sufficient profit. One must use these predictions with a strategic agent that knows how to best use them, preferably 
 using reinforcement learning.  
 
-Ethical Consideration
+## Ethical Consideration
 This model does not break any ethical boundaries as it simply uses objective price data to find patterns within it to forecast it. As the stock market is a free market and noone knows what happens 
 tomorrow, it is all fair and ethical to all competitors regardless of what methods they choose to analyze publically available data.
 
 
-Roles:
+# Roles:
 
 Hrishikesh:
 Practical Motivation
